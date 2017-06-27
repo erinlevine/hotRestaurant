@@ -17,7 +17,7 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 // Star Wars Characters (DATA)
 // =============================================================
-var table = [{
+var tables = [{
   name: "Yoda",
   phone: "555-555-5555",
   email: "yoda@yoda.com",
@@ -57,14 +57,17 @@ app.get("/reserve", function(req, res) {
   res.sendFile(path.join(__dirname, "reserve.html"));
 });
 
+app.get("/tables", function(req, res) {
+ res.sendFile(path.join(__dirname, "tables.html"));
+});
 
 // Create New Characters - takes in JSON input
 app.post("/api/new", function(req, res) {
   var newcharacter = req.body;
 
   console.log(newcharacter);
-  if (table.length < 5) {
-    table.push(newcharacter);
+  if (tables.length < 5) {
+    tables.push(newcharacter);
   }
 
   else {
@@ -75,9 +78,9 @@ app.post("/api/new", function(req, res) {
   res.json(newcharacter);
 });
 
-app.get("/api/table", function(req, res) {
+app.get("/api/tables", function(req, res) {
  
-    res.json(table);
+    res.json(tables);
   
 });
 
